@@ -22,16 +22,11 @@ for BUILDPACK in $(cat $1/.buildpacks); do
   fi
 
   if [ "$url" != "" ]; then
-    printenv
-    echo "GIT_SSH=$GIT_SSH git clone $url $dir 2>&1"
-    git clone $url $dir 2>&1
+    git clone $url $dir >/dev/null 2>&1
     cd $dir
 
     if [ "$branch" != "" ]; then
-      echo "GIT branch $branch"
-      git checkout $branch 2>&1
-      echo "Checked out $url#$branch"
-      ls
+      git checkout $branch >/dev/null 2>&1
     fi
 
     chmod +x ./bin/{detect,compile,release}
@@ -55,4 +50,3 @@ for BUILDPACK in $(cat $1/.buildpacks); do
 done
 
 echo "Using release configuration from last framework $framework:" | indent
-cat $1/last_pack_release.out | indent
