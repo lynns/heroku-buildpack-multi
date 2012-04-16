@@ -22,7 +22,8 @@ for BUILDPACK in $(cat $1/.buildpacks); do
   fi
 
   if [ "$url" != "" ]; then
-    echo "git clone $url $dir 2>&1"
+    printenv
+    echo "GIT_SSH=$GIT_SSH git clone $url $dir 2>&1"
     git clone $url $dir 2>&1
     cd $dir
 
