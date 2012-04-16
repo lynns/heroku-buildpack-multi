@@ -26,9 +26,11 @@ for BUILDPACK in $(cat $1/.buildpacks); do
     git clone $url $dir >/dev/null 2>&1
     cd $dir
 
-    echo "GIT branch $branch"
     if [ "$branch" != "" ]; then
+      echo "GIT branch $branch"
       git checkout $branch >/dev/null 2>&1
+      echo "Checked out $url#$branch"
+      echo `ls`
     fi
 
     chmod +x ./bin/{detect,compile,release}
