@@ -22,9 +22,11 @@ for BUILDPACK in $(cat $1/.buildpacks); do
   fi
 
   if [ "$url" != "" ]; then
+    echo "GIT URL $url"
     git clone $url $dir >/dev/null 2>&1
     cd $dir
 
+    echo "GIT branch $branch"
     if [ "$branch" != "" ]; then
       git checkout $branch >/dev/null 2>&1
     fi
@@ -42,6 +44,8 @@ for BUILDPACK in $(cat $1/.buildpacks); do
       fi
 
       $dir/bin/release $1 > $1/last_pack_release.out
+    else
+      echo "!!!!!! Failed to Detect Framework: $framework"
     fi
   fi
 done
