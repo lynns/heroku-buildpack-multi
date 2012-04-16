@@ -28,9 +28,9 @@ for BUILDPACK in $(cat $1/.buildpacks); do
 
     if [ "$branch" != "" ]; then
       echo "GIT branch $branch"
-      git checkout $branch >/dev/null 2>&1
+      git checkout $branch 2>&1
       echo "Checked out $url#$branch"
-      echo `ls`
+      ls
     fi
 
     chmod +x ./bin/{detect,compile,release}
