@@ -23,7 +23,7 @@ for BUILDPACK in $(cat $1/.buildpacks); do
 
   if [ "$url" != "" ]; then
     echo "GIT URL $url"
-    git clone $url $dir >/dev/null 2>&1
+    git clone $url $dir 2>&1
     cd $dir
 
     if [ "$branch" != "" ]; then
